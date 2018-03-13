@@ -1,0 +1,53 @@
+.App {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.App-logo {
+  height: 50px;
+}
+
+.App-header {
+  background-color: forestgreen;
+  height: 100px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro{
+  background-size: contain;
+  background: url("./assets/images/garden.jpg") no-repeat bottom;
+  font-size: large;
+  width: 100%;
+  height: calc(100% - 140px);
+}
+
+.btn-g-login {
+  background: url(./assets/images/btn-g-login/btn_google_signin_light_normal_web@2x.png) no-repeat;
+  background-size: cover !important;
+  width: 200px;
+  height: 48px;
+  display: inline-block;
+  padding: 24px 100px;
+  margin-top: 50px;
+}
+
+.btn-g-login:active {
+  background: url(./assets/images/btn-g-login/btn_google_signin_light_pressed_web@2x.png) no-repeat;
+}
+
+.btn-g-login:focus {
+  background: url(./assets/images/btn-g-login/btn_google_signin_light_focus_web@2x.png) no-repeat;
+}
+
+.btn-g-login:disabled {
+  background: url(./assets/images/btn-g-login/btn_google_signin_light_disabled_web@2x.png) no-repeat;
+}

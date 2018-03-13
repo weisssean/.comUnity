@@ -1,0 +1,379 @@
+
+/*=========SIDE NAV============*/
+.sidenav.show {
+  left: 0;
+}
+
+
+.sidenav {
+  float: left;
+  top: 54px;
+  bottom: 0;
+  z-index: 1;
+  position: fixed;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  left: -264px;
+  width: 320px;
+  background: #eee;
+  color: #aaa;
+  padding-bottom: 50px;
+  border-right: solid 1px lightgray;
+  box-shadow: rgba(0, 0, 0, 0.15) 2px 2px 4px;
+}
+
+.sidenav .users-list {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.sidenav .users-list a:hover, .sidenav .test-point-list a:hover {
+  text-decoration: none !important;
+}
+.sidenav .scroll-rows {
+  height: calc(100% - 100px);
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.card-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.main_content {
+  transition: all 0.3s ease;
+  height: 100%;
+  position: fixed;
+  right: 0;
+  overflow: auto;
+  min-width: 350px;
+  left: 55px;
+  width: calc(100% - 55px) !important;
+
+}
+
+.main_content.show {
+  left: 220px;
+  width: calc(100% - 220px) !important;;
+}
+
+/*Nav list*/
+.sidenav .users-list, .sidenav .test-point-list {
+  font-size: .8rem !important;
+}
+
+.sidenav .users-list h5, .sidenav .test-point-list h5 {
+  font-size: .8rem !important;
+}
+
+.test-point-list .list-group-item:first-child, .users-list .list-group-item:first-child {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  /*border-bottom: solid orange 1px;*/
+  border: none;
+
+}
+
+.test-point-list .list-group-item:last-child, .userslist .list-group-item:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  /*border-top: solid orange 1px;*/
+  border: none;
+}
+
+.users-list .list-group-item {
+  background: transparent;
+  /*border: 1px solid orange;*/
+  padding-top: 0;
+  padding-bottom: 10px;
+  border: none;
+}
+
+.users-list .list-group-item .list-group-item-heading {
+  color: forestgreen;
+  margin-bottom: 0;
+}
+
+.users-list .list-group-item.active, .users-list .list-group-item.active:focus, .users-list .list-group-item.active:hover {
+  z-index: 2;
+  color: black;
+  background-color: forestgreen;
+  /*border-color: darkorange;*/
+  border: none;
+}
+
+.users-list .list-group-item .list-group-item-text {
+  color: #aaa;
+  margin-bottom: 10px;
+  font-size: small;
+}
+
+.users-list .list-group-item.active .list-group-item-text, .users-list .list-group-item.active:focus .list-group-item-text, .users-list .list-group-item:hover .list-group-item-text {
+  color: #888;
+}
+
+/*.test-point-list .list-group-item.active:hover, .users-list .list-group-item:hover {*/
+/*background: #ffAA00;*/
+/*color: black;*/
+/*}*/
+
+.test-point-list .list-group-item-heading:hover, .users-list .list-group-item-heading:hover {
+  /*background: #555;*/
+  color: darkgreen;
+}
+
+.test-point-list .btn-default, .users-list .btn-default, .builder_side_container .btn-primary {
+  background: #555;
+  color: forestgreen;
+  /*border: 1px solid orange;*/
+  border: none;
+}
+
+.test-point-list .active .list-group-item-heading,
+.users-list .active .list-group-item-heading {
+  color: #eee;
+}
+
+.sidenav .btn-outline-warning:hover {
+  color: #eee !important;
+  background-color: forestgreen !important;
+  border-color: forestgreen !important;
+}
+
+.sidenav .btn-outline-warning {
+  color: forestgreen !important;
+  border-color: forestgreen !important;
+}
+
+.sidenav .user-image {
+  width: 40px;
+  height: 40px;
+  /*margin-top: -40px;*/
+  /*position: absolute;*/
+  /*bottom: 10px;*/
+  transition: all 0.3s ease;
+  margin-left: 165px;
+  border-radius: 50%;
+  border: 1px solid darkgreen;
+}
+
+.sidenav.show .user-image {
+  margin-top: 0;
+  margin-left: 0;
+  width: 90px;
+  height: 90px;
+}
+
+.sidenav.show .user-image-holder {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  bottom: 0;
+  width: initial
+}
+
+.sidenav .user-image-holder {
+  opacity: 0;
+  visibility: collapse;
+  transition: all 0.3s ease;
+}
+
+.sidenav.show .user-desc-holder {
+  position: relative;
+  bottom: 0;
+  width: initial
+}
+
+.sidenav .user-desc-holder {
+  position: absolute;
+  bottom: 75px;
+  width: 100%;
+}
+
+.sidenav .reporting_side_container {
+  position: relative;
+  height: 100%;
+}
+
+.btn-home .fa-home {
+  font-size: 1.5em !important;
+  transition: all 0.3s ease;
+}
+
+.show .btn-home .fa-home {
+  font-size: 2em !important;
+}
+
+.sidenav .btn-home {
+  position: fixed;
+  bottom: 8px;
+  left: 8px;
+  right: 0;
+
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+  /*margin-left: 171px;*/
+  border-radius: 50%;
+  padding: 0 !important;
+  padding-top: 4px !important;
+}
+
+.sidenav.show .btn-home {
+  bottom: 10px;
+  left: 10px;
+  width: 50px;
+  height: 50px;
+  padding-top: 0px !important;
+
+}
+
+.sidenav .avatar-col {
+  /*margin-left: 70px;*/
+  height: 50px;
+  visibility: hidden;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.sidenav.show .avatar-col {
+  visibility: visible;
+  display: block;
+}
+
+.sidenav.show .btn-nav-link, .sidenav.show .user-image-small {
+  visibility: collapse;
+  opacity: 0;
+  top: 0;
+}
+
+/*.sidenav .btn-nav-link{*/
+  /*position: absolute;*/
+  /*border: none;*/
+  /*border-radius: 50%;*/
+  /*width: 40px;*/
+  /*height: 40px;*/
+  /*right: 14px;*/
+  /*top: 0;*/
+  /*transition: all .5s ease;*/
+  /*opacity: 1;*/
+  /*margin-right: -6px;*/
+  /*font-size: 1.5em !important;*/
+/*}*/
+
+
+
+.sidenav .btn-nav-link{
+  position: absolute;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  right: 14px;
+  top: 0;
+  transition: all .5s ease;
+  opacity: 1;
+  margin-right: -6px;
+  font-size: 1.5rem !important;
+}
+
+.sidenav.show .txt-nav-link {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sidenav .txt-nav-link {
+  transition: all .3s ease;
+  visibility: collapse;
+  opacity: 0;
+}
+
+/*=========SIDE NAV End============*/
+.sidenav .nav-links-list {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.sidenav .nav-links-list a:hover, .sidenav .test-point-list a:hover {
+  text-decoration: none !important;
+}
+
+/*Nav list*/
+.sidenav .nav-links-list {
+  font-size: .8rem !important;
+  margin-bottom: .5rem;
+}
+
+.sidenav .nav-links-list h5{
+  font-size: .8rem !important;
+}
+
+.nav-links-list .list-group-item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  /*border-bottom: solid orange 1px;*/
+  border: none;
+
+}
+
+.test-point-list .list-group-item:last-child, .nav-links-list .list-group-item:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  /*border-top: solid orange 1px;*/
+  border: none;
+}
+
+.nav-links-list .list-group-item {
+  background: #eee;
+  /*border: 1px solid orange;*/
+  color: forestgreen;
+  border: none;
+  transition: all .3s ease;
+  text-align: left;
+}
+
+
+.show .nav-links-list .list-group-item {
+  padding: 0.4rem 1.25rem;
+}
+
+ .nav-links-list .list-group-item .list-group-item-heading {
+  color: forestgreen;
+
+}
+
+ .nav-links-list .list-group-item.active, .nav-links-list .list-group-item.active:focus, .nav-links-list .list-group-item.active:hover {
+  z-index: 2;
+  color: black;
+  background-color: forestgreen;
+  /*border-color: darkorange;*/
+  border: none;
+}
+
+.nav-links-list .list-group-item.active .list-group-item-text, .nav-links-list .list-group-item.active:focus .list-group-item-text, .nav-links-list .list-group-item.active:hover .list-group-item-text {
+  color: #555;
+}
+
+.nav-links-list .list-group-item.active:hover {
+  background: #ffAA00;
+  color: black;
+}
+
+.nav-links-list .list-group-item-heading:hover {
+  /*background: #555;*/
+  color: darkgreen;
+}
+
+.nav-links-list .btn-default {
+  background: #555;
+  color: forestgreen;
+  /*border: 1px solid orange;*/
+  border: none;
+}
+
+.nav-links-list .active .list-group-item-heading {
+  color: #eee;
+}

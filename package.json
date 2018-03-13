@@ -1,0 +1,40 @@
+{
+  "name": "dotcomunity",
+  "version": "1.0.0",
+  "description": "A website for connecting with people in your community",
+  "main": "server.js",
+  "scripts": {
+    "start": "concurrently  \"npm run login\" \"npm run frontend\" \"npm run api\" \"npm run backend\" ",
+    "login": "cd login && react-scripts start",
+    "frontend": "cd client && PORT=3001 react-scripts start",
+    "backend": "node server.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "api": "json-server --watch tools/db.json --port 3006"
+  },
+  "keywords": [
+    "community"
+  ],
+  "author": "TacoEater",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "connect-redis": "^3.3.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "googleapis": "^27.0.0",
+    "passport": "^0.4.0",
+    "passport-google-oauth2": "^0.1.6",
+    "react-scripts": "1.1.1"
+  },
+  "devDependencies": {
+    "json-server": "^0.12.1",
+    "concurrently": "^3.5.1",
+    "cors-prefetch-middleware": "^1.0.0",
+    "images-upload-middleware": "^1.1.1",
+    "mv": "^2.1.1"
+  }
+}

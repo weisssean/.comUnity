@@ -1,0 +1,111 @@
+{
+  "locations-result": {
+    "locations": [
+      {
+        "status": 1,
+        "uuid": "3e321167-1b78-411c-8919-250b26a442e4",
+        "name": "Sean Weiss",
+        "desc": "sadsa dsdF a sdf adsf asd  asfd ",
+        "type": 1,
+        "phone": "5086856467",
+        "email": "weisssean@gmail.com",
+        "address": "14 Amy Rd",
+        "lat": 42.2793,
+        "lng": -71.4162
+      },
+      {
+        "status": 1,
+        "uuid": "d67e16c4-e8ef-4c2a-a7e8-1421bf43d6f1",
+        "name": "Sean Weiss",
+        "desc": "Hi patrick how are you 1234768763879012370",
+        "type": 2,
+        "phone": "5086856467",
+        "email": "weisssean@gmail.com",
+        "address": "14 Amy Rd",
+        "lat": 42.289713780825736,
+        "lng": -71.40178044433594,
+        "userId": "",
+        "userImageUrl": ""
+      },
+      {
+        "status": 1,
+        "uuid": "b1e4a0a6-c6aa-4358-8126-dfcd6ada6c17",
+        "name": "Kenneth Weiss",
+        "desc": "fgdhfgdhd fgh hgfbd hgfdh fdfg bdfg gh ",
+        "type": 1,
+        "phone": "5086856467",
+        "email": "weisssean@gmail.com",
+        "address": "54 Harrington rd",
+        "lat": 42.26761419692368,
+        "lng": -71.51233037109375,
+        "imageURLs": []
+      },
+      {
+        "status": 1,
+        "uuid": "70b1dfa3-2363-449f-a105-96b3f478a9b1",
+        "name": "SHEAN WEISS",
+        "desc": "s;'lKFj;kjSDF Lkjsa;l fkj;lkjf ds;lkjs al;kj ;dflskj ",
+        "type": 1,
+        "phone": "5086856467",
+        "email": "weisssean@gmail.com",
+        "address": "14 AMY RD",
+        "lat": 42.2793,
+        "lng": -71.4162,
+        "imageURLs": []
+      },
+      {
+        "status": 1,
+        "uuid": "07e404d0-e0dc-43a6-a076-067f04652006",
+        "name": "Eggs for free",
+        "desc": "A description for this location",
+        "type": 3,
+        "phone": "23412421424214",
+        "email": "weisssean@hotmail.com",
+        "address": "2 Pershing Avenue",
+        "lat": 42.27625173852058,
+        "lng": -71.4132817565918,
+        "imageURLs": [
+          "http://localhost:9090/images/7e284e4de9103a1e6e69161b572f3407.jpg",
+          "http://localhost:9090/images/9e12b079d8a242a625fa6c8ebb6ee5a3.png"
+        ]
+      }
+    ]
+  },
+  "users-result": {
+    "users": [
+      {
+        "provider": "google",
+        "id": "111164269255537181390",
+        "displayName": "Sean Weiss",
+        "name": {
+          "familyName": "Weiss",
+          "givenName": "Sean"
+        },
+        "language": "en",
+        "email": "sean@p2stec.com",
+        "photos": [
+          {
+            "value": "https://lh3.googleusercontent.com/-8UBuUzYb5CA/AAAAAAAAAAI/AAAAAAAAAOY/10f1NIWwZGM/photo.jpg?sz=50"
+          }
+        ]
+      },
+      {
+        "provider": "google",
+        "id": "111516644512196765667",
+        "displayName": "sean weiss",
+        "name": {
+          "familyName": "weiss",
+          "givenName": "sean"
+        },
+        "language": "en_GB",
+        "email": "weisssean@gmail.com",
+        "gender": "male",
+        "photos": [
+          {
+            "value": "https://lh4.googleusercontent.com/-DmcEa7sHwFk/AAAAAAAAAAI/AAAAAAAAAh0/5-4zGOv8trQ/photo.jpg?sz=50"
+          }
+        ]
+      }
+    ]
+  }
+}
