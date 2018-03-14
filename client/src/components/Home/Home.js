@@ -27,6 +27,9 @@ class Home extends Component {
         this.setState({
             locationModal: show === true ? show : !this.state.locationModal
         });
+        if( !show )
+            this.props.history.push(`/`);
+
     }
 
     componentDidMount() {

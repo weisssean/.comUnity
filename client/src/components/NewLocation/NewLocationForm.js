@@ -6,7 +6,20 @@ import * as locationsActions from "../../actions/locationsActions";
 import PropTypes from 'prop-types';
 
 import TextInput from "../common/TextInput";
-import {Button, Card, CardText, CardTitle, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane} from 'reactstrap';
+import {
+    Button,
+    Card,
+    CardGroup,
+    CardText,
+    CardTitle,
+    Col,
+    Nav,
+    NavItem,
+    NavLink,
+    Row,
+    TabContent,
+    TabPane
+} from 'reactstrap';
 import toastr from "toastr";
 import MiniMap from "./MiniMap";
 import AddressLookupModal from "./AddressLookupModal";
@@ -14,12 +27,13 @@ import TextWithButtonInput from "../TextWithButtonInput";
 import SelectType from "./SelectType";
 import ImageUpload from "./ImageUpload";
 import uuid from 'uuid/v4';
+import axios from "axios";
 
 
 class NewLocationForm extends React.Component {
     constructor(props) {
         super(props);
-
+        this.clearTempImages();
         this.state = {
             addressSearchModal: false,
             activeTab: "1",
@@ -28,10 +42,10 @@ class NewLocationForm extends React.Component {
                 lng: -71.4162
             },
             errors: {},
-            newImageUrls:[],
+            newImageUrls: [],
             form: {
                 status: 1,
-                uuid:  uuid(),
+                uuid: uuid(),
                 name: "",
                 desc: "",
                 type: 1,
@@ -42,10 +56,9 @@ class NewLocationForm extends React.Component {
                 lng: -71.4162,
                 userId: props.user.uId,
                 userImageUrl: props.user.uImg,
-                imageURLs:[]
+                imageURLs: []
             }
-        }
-        ;
+        };
 
 
         this.updateFormState = this.updateFormState.bind(this);
@@ -59,6 +72,13 @@ class NewLocationForm extends React.Component {
         this.locationFormIsValid = this.locationFormIsValid.bind(this);
         this.setFormById = this.setFormById.bind(this);
 
+    }
+
+    clearTempImages() {
+        const url = "http://localhost:9090/cleartemp";
+        axios.get(url, {
+            params: {},
+        })
     }
 
     setFormById(locId) {
@@ -217,25 +237,33 @@ class NewLocationForm extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         if (this.locationFormIsValid()) {
-            this.state.form.imageURLs= Object.assign([],this.state.form.imageURLs,this.state.newImageUrls);
-            this.props.actions.saveLocation(this.state.form,this.props.match.params.locId).then(res => {
-                toastr.success(`save location result: ${res}`);
-                this.props.history.push("/");
-            }).catch(error => {
-                toastr.error(error);
-                // this.props.actions.callSuccess();
-                throw(error);
+            let form = this.state.form;
+            form.imageURLs = form.imageURLs.concat(this.state.newImageUrls);// Object.assign([],...form.imageURLs,...this.state.newImageUrls);
+
+            this.setState({form: form}, () => {
+                this.props.actions.saveLocation(this.state.form, this.props.match.params.locId).then(res => {
+                    toastr.success(`save location result: ${res}`);
+                    this.props.history.push("/");
+                }).catch(error => {
+                    toastr.error(error);
+                    // this.props.actions.callSuccess();
+                    throw(error);
+                });
+
             });
+
+
         }
     }
-    uploadSuccess(data){
+
+    uploadSuccess(data) {
         let form = this.state.form;
 
-        data = data.map(url=>{
-            return url.replace("temp","images");
+        data = data.map(url => {
+            return url.replace("temp", "images");
         });
 
-        this.setState({newImageUrls:data});
+        this.setState({newImageUrls: data});
     }
 
     render() {
@@ -365,30 +393,24 @@ class NewLocationForm extends React.Component {
                                 </TabPane>
                                 <TabPane tabId="2">
 
-                                    <ImageUpload uploadSuccess={this.uploadSuccess} name={this.state.form.name} currentImages={this.state.form.imageURLs}/>
-
-                                    <Row>
+                                    <ImageUpload uploadSuccess={this.uploadSuccess} name={this.state.form.name}
+                                                 currentImages={this.state.form.imageURLs}/>
+                                    {this.props.location.imageURLs &&
+                                    <CardGroup>
                                         {
-                                            this.state.form.imageURLs.map(url=>
+                                            this.state.form.imageURLs.map((url, i) =>
 
-                                                    <Card body>
-                                                        <CardTitle>Special Title Treatment</CardTitle>
-                                                        <CardText>With supporting text below as a natural lead-in to additional
-                                                            content.</CardText>
-                                                        <img src={url}/>
-                                                        <Button>Go somewhere</Button>
-                                                    </Card>
+                                                <Card key={i} body>
+                                                    <CardTitle>Special Title Treatment</CardTitle>
+                                                    <CardText>With supporting text below as a natural lead-in to
+                                                        additional
+                                                        content.</CardText>
+                                                    <img src={url}/>
+                                                    <Button>Go somewhere</Button>
+                                                </Card>
                                             )
                                         }
-                                        {/*<Col sm="6">*/}
-                                            {/*<Card body>*/}
-                                                {/*<CardTitle>Special Title Treatment</CardTitle>*/}
-                                                {/*<CardText>With supporting text below as a natural lead-in to additional*/}
-                                                    {/*content.</CardText>*/}
-                                                {/*<Button>Go somewhere</Button>*/}
-                                            {/*</Card>*/}
-                                        {/*</Col>*/}
-                                    </Row>
+                                    </CardGroup>}
                                 </TabPane>
                             </TabContent>
 

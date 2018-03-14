@@ -3,7 +3,6 @@ import ImagesUploader from 'react-images-uploader';
 import 'react-images-uploader/styles.css';
 import 'react-images-uploader/font.css';
 import PropTypes from "prop-types";
-import fs from 'fs';
 import {selectUserSuccess} from "../../actions/userActions";
 import axios from "axios";
 
@@ -16,7 +15,7 @@ class ImageUpload extends Component {
         this.onLoadStart = this.onLoadStart.bind(this);
         this.onLoadEnd = this.onLoadEnd.bind(this);
 
-        this.getTempFiles();
+        // this.getTempFiles();
 
         this.state ={
             uploaded:[],
@@ -26,20 +25,20 @@ class ImageUpload extends Component {
 
 
     }
-    getTempFiles(){
-        const url= "http://localhost:9090/gettempfiles";
-        axios.get(url, {
-            params: {},
-        }).then(response => {
-            let tempImages = [];
-            response.data.map(tmp=>{
-                tempImages.push(`http://localhost:9090/temp/${tmp}`);
-            });
-            this.setState({temp:tempImages});
-        }).catch((error) => {
-            this.setState({temp:[]});
-        });
-    }
+    // getTempFiles(){
+    //     const url= "http://localhost:9090/gettempfiles";
+    //     axios.get(url, {
+    //         params: {},
+    //     }).then(response => {
+    //         let tempImages = [];
+    //         response.data.map(tmp=>{
+    //             tempImages.push(`http://localhost:9090/temp/${tmp}`);
+    //         });
+    //         this.setState({temp:tempImages});
+    //     }).catch((error) => {
+    //         this.setState({temp:[]});
+    //     });
+    // }
     onLoadStart(info){
     }
 

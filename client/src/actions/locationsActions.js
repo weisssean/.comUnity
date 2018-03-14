@@ -9,21 +9,21 @@ export function loadLocationsSuccess(locations) {
     return {type: types.LOAD_LOCATIONS_SUCCESS, locations};
 }
 
-export function selectLocationSuccess(location) {
-    return {type: types.SELECT_LOCATION_SUCCESS, location};
+export function selectLocationSuccess(loc) {
+    return {type: types.SELECT_LOCATION_SUCCESS, loc};
 }
 
 export function selectLocationError() {
     return {type: types.SELECT_LOCATION_ERROR};
 }
 
-export function createLocationSuccess() {
-    return {type: types.CREATE_LOCATION_SUCCESS};
+export function createLocationSuccess(loc) {
+    return {type: types.CREATE_LOCATION_SUCCESS,loc};
 
 }
 
-export function updateLocationSuccess() {
-    return {type: types.UPDATE_LOCATION_SUCCESS};
+export function updateLocationSuccess(loc) {
+    return {type: types.UPDATE_LOCATION_SUCCESS,loc};
 
 }
 
@@ -70,16 +70,13 @@ export function saveLocation(loc,uuid) {
         if (uuid) {
             loc.uuid=uuid;
             return api.editLocation(loc).then(loc => {
-                dispatch(createLocationSuccess(loc));
-
-
+                dispatch(updateLocationSuccess(loc));
             }).catch(error => {
                 throw(error);
             })
         } else {
             return api.addLocation(loc).then(loc => {
-                dispatch(updateLocationSuccess(loc));
-
+                dispatch(createLocationSuccess(loc));
             }).catch(error => {
                 throw(error);
             })

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import {Card, Modal, ModalBody, ModalHeader,CardTitle,CardText} from 'reactstrap';
+import {Card, CardGroup, CardText, CardTitle, Modal, ModalBody} from 'reactstrap';
 
 class LocationModal extends Component {
     constructor(props, context) {
@@ -11,7 +11,7 @@ class LocationModal extends Component {
 
 
     render() {
-        const {location}= this.props;
+        const {location} = this.props;
         return (
             <div>
                 {
@@ -20,17 +20,26 @@ class LocationModal extends Component {
                            className={this.props.className ? this.props.className : ""}>
 
                         {/*<ModalHeader*/}
-                            {/*toggle={this.props.toggleModule}>{`Location: ${this.props.location.name}`}</ModalHeader>*/}
-                        <ModalBody >
+                        {/*toggle={this.props.toggleModule}>{`Location: ${this.props.location.name}`}</ModalHeader>*/}
+                        <ModalBody>
 
                             <Card body>
                                 <CardTitle>{`Location: ${location.name}`}</CardTitle>
                                 <CardText>{location.desc}</CardText>
                                 {/*<Button>Go somewhere</Button>*/}
                             </Card>
+                            {this.props.location.imageURLs &&
+                            <CardGroup>
+                                {
+                                    this.props.location.imageURLs.map((url, i) =>
 
-
-
+                                        <Card key={i} body>
+                                            <img src={url}/>
+                                        </Card>
+                                    )
+                                }
+                            </CardGroup>
+                            }
                         </ModalBody>
                         {/*<ModalFooter>*/}
                         {/*<Button color="secondary" onClick={this.props.toggleModule}>Cancel</Button>&nbsp;*/}

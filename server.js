@@ -207,11 +207,15 @@ app.post('/multiple', function (req, res) {
 );
 
 app.get('/gettempfiles', (req, res)=>{
-    res.send(fs.readdirSync('./static/temp'));
+    if(fs.existsSync("static/temp"))
+    res.send(fs.readdirSync('static/temp'));
+    else
+        send([])
 });
 
 app.get("/move", (req, res) => {
     // console.log("path",path)
+
     mv('./static/temp', './static/uploaded', {mkdirp: false, clobber: false}, function (err) {
 
         if (err) {
@@ -232,7 +236,9 @@ function sendError(res, error) {
 }
 
 
-app.get("/clear", () => {
+app.get("/cleartemp", () => {
+    if(fs.existsSync("static/temp"))
+        fs.delete('static/temp');
 });
 
 // module.exports =

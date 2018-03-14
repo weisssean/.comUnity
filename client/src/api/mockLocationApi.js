@@ -59,7 +59,7 @@ LocationsApiClass.prototype = {
                     params: {}
                 })
                     .then(function (response) {
-                        resolve(Object.assign([], response.data));
+                        resolve(loc);
                         moveTempFiles();
                     })
                     .catch(function (error) {
@@ -84,7 +84,7 @@ LocationsApiClass.prototype = {
                     params: {}
                 })
                     .then(function (response) {
-                        resolve(Object.assign([], response.data));
+                        resolve(loc);
                         moveTempFiles();
                     })
                     .catch(function (error) {
