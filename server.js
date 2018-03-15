@@ -8,6 +8,7 @@ var express = require('express')
     , session = require('express-session')
     // , RedisStore = require('connect-redis')(session)
     , GoogleStrategy = require('passport-google-oauth2').Strategy
+    , FacebookStrategy = require('passport-facebook').Strategy
     , axios = require("axios");
 
 const fs = require('fs');
@@ -29,9 +30,10 @@ const port = process.env.PORT || 9090;
  * Serve all files from the images directory
  */
 app.use("/temp", express.static('static/temp'));
-app.use("/images",express.static('static/uploaded'));
+app.use("/images", express.static('static/uploaded'));
 
-app.use(corsPrefetch,()=>{});
+app.use(corsPrefetch, () => {
+});
 
 //
 // let dir = path.join("temp", './client/public/static');
@@ -58,8 +60,29 @@ app.use(function (req, res, next) {
     next()
 });
 
+
+
 /**
- * setting up for google login
+ * =====================setting up for facebook login=====================
+ */
+
+passport.use(new FacebookStrategy({
+        clientID: "580490618964773",
+        clientSecret: "d8f0fc0ec63b0067eb16fa92eab5a1ff",
+        callbackURL: "http://localhost:9090/auth/facebook/callback",
+        profileFields: ['id', 'displayName', 'name', 'gender', 'photos']
+    },
+    function (accessToken, refreshToken, profile, done) {
+        console.log("facebook user", profile);
+        findOrCreateUser(profile).then(user => {
+            done(null, profile);
+        }).catch(error => {
+            done(error, false);
+        });
+    }
+));
+/**
+ * =====================setting up for google login=====================
  */
 passport.use(new GoogleStrategy({
         clientID: "1028091578492-r8k4erb004a3mm35gh67rfm8nrm2gaca.apps.googleusercontent.com",
@@ -70,6 +93,8 @@ passport.use(new GoogleStrategy({
     },
 
     function (req, accessToken, refreshToken, profile, done) {
+        console.log("google user", profile);
+
         findOrCreateUser(profile).then(user => {
             done(null, profile);
         }).catch(error => {
@@ -182,17 +207,37 @@ app.get('/auth/google',
 
 
 app.get('/auth/google/callback',
-    passport.authenticate('google', {failureRedirect: '/login'}),
+    passport.authenticate('google', { successRedirect: '/',failureRedirect: '/login'}),
     function (req, res) {
         // console.log(req.user);
         // Authenticated successfully
-        res.redirect('http://localhost:3001/');
+        // res.redirect('http://localhost:3001/');
     });
 
 /**
  * google login end ===================================
  */
 
+
+// Redirect the user to Facebook for authentication.  When complete,
+// Facebook will redirect the user back to the application at
+//     /auth/facebook/callback
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+// Facebook will redirect the user to this URL after approval.  Finish the
+// authentication process by attempting to obtain an access token.  If
+// access was granted, the user will be logged in.  Otherwise,
+// authentication has failed.
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect: '/login'
+    }));
+
+
+/**
+ * facebook login end ===================================
+ */
 
 app.post('/multiple', function (req, res) {
         if (!fs.existsSync('./static/temp')) {
@@ -206,9 +251,9 @@ app.post('/multiple', function (req, res) {
     }
 );
 
-app.get('/gettempfiles', (req, res)=>{
-    if(fs.existsSync("static/temp"))
-    res.send(fs.readdirSync('static/temp'));
+app.get('/gettempfiles', (req, res) => {
+    if (fs.existsSync("static/temp"))
+        res.send(fs.readdirSync('static/temp'));
     else
         send([])
 });
@@ -237,7 +282,7 @@ function sendError(res, error) {
 
 
 app.get("/cleartemp", () => {
-    if(fs.existsSync("static/temp"))
+    if (fs.existsSync("static/temp"))
         fs.delete('static/temp');
 });
 
@@ -272,7 +317,7 @@ function move(oldPath, newPath, callback) {
 }
 
 
-app.get("/user",  (req, res) => {
+app.get("/user", (req, res) => {
     // console.log("req.session", req.session.passport);
     // console.log("user", req.user);
 
@@ -295,7 +340,6 @@ app.get("/user",  (req, res) => {
         sendError(res, "user not found");
 
 });
-
 
 
 /**

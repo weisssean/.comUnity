@@ -12,7 +12,9 @@ class App extends Component {
                 </header>
 
                 <div className="App-intro">
-                        <a className="btn-g-login" href="http://localhost:9090/auth/google"></a>
+                    <a className="btn-g-login" href="http://localhost:9090/auth/google"></a>
+                    <br/>
+                    <a className="btn-fb-login" href="http://localhost:9090/auth/facebook">Facebook</a>
                 </div>
             </div>
         );

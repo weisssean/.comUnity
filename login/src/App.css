@@ -51,3 +51,8 @@
 .btn-g-login:disabled {
   background: url(./assets/images/btn-g-login/btn_google_signin_light_disabled_web@2x.png) no-repeat;
 }
+
+.btn-fb-login{
+  background: blue;
+  color: white;
+}
