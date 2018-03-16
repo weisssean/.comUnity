@@ -101,8 +101,10 @@ LocationsApiClass.prototype = {
             axios.get(url, {
                 params: {id:uId}
             }).then(response => {
-              debugger;
-
+                const user = response.data.users.filter(u=>u.id===uId)[0];
+                    if(user&& user.photos[0])
+                        resolve(user.photos[0].value);
+                    else reject('User image not found');
             });
         })
     }

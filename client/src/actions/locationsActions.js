@@ -2,8 +2,8 @@ import * as types from "./actionTypes";
 import LocationsApi from "../api/LocationsApi";
 import mockLocationApi from "../api/mockLocationApi";
 import {beginAjaxCall} from "./ajaxStatusActions";
-import axios from "axios/index";
-let api = process.env.NODE_ENV === "production"? LocationsApi: mockLocationApi;
+
+let api = process.env.NODE_ENV === "production" ? LocationsApi : mockLocationApi;
 
 export function loadLocationsSuccess(locations) {
     return {type: types.LOAD_LOCATIONS_SUCCESS, locations};
@@ -18,12 +18,12 @@ export function selectLocationError() {
 }
 
 export function createLocationSuccess(loc) {
-    return {type: types.CREATE_LOCATION_SUCCESS,loc};
+    return {type: types.CREATE_LOCATION_SUCCESS, loc};
 
 }
 
 export function updateLocationSuccess(loc) {
-    return {type: types.UPDATE_LOCATION_SUCCESS,loc};
+    return {type: types.UPDATE_LOCATION_SUCCESS, loc};
 
 }
 
@@ -64,11 +64,11 @@ export function getLocationById(id) {
 }
 
 
-export function saveLocation(loc,uuid) {
+export function saveLocation(loc, uuid) {
     return function (dispatch) {
         dispatch(beginAjaxCall());
         if (uuid) {
-            loc.uuid=uuid;
+            loc.uuid = uuid;
             return api.editLocation(loc).then(loc => {
                 dispatch(updateLocationSuccess(loc));
             }).catch(error => {
@@ -85,12 +85,15 @@ export function saveLocation(loc,uuid) {
     }
 }
 
-export function getUserImage(uId){
+
+export function getUserImage(uId) {
+    return function (dispatch) {
         return api.getUserImage(uId).then(img => {
-           return img;
+            return img;
         }).catch(error => {
             throw(error);
         })
+    }
 }
 
 export function callSuccess() {

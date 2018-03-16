@@ -10,17 +10,28 @@ import {withRouter} from "react-router-dom";
 class LocationModal extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {};
+        this.state = {
+            userImg:""
+        };
         this.getUserImgFromLocation = this.getUserImgFromLocation.bind(this);
     }
 
-    getUserImgFromLocation(){
-        this.props.actions.getUserImage(this.props.loc.userId).then(result=>{
-
+    getUserImgFromLocation(uId){
+        this.props.actions.getUserImage(uId).then(result=>{
+            this.setState({userImg:result})
         }).catch(exception=>{
+            debugger;
 
         })
     }
+
+    componentWillReceiveProps(nextProps) {
+
+        if ( nextProps.loc && this.props.loc !== nextProps.loc) {
+            this.getUserImgFromLocation(nextProps.loc.userId);
+        }
+    }
+
     render() {
         const {loc} = this.props;
         return (
@@ -35,7 +46,10 @@ class LocationModal extends Component {
                         <ModalBody>
 
                             <Card body>
-                                <CardTitle>{`Location: ${loc.name}`}</CardTitle>
+                                <CardTitle>{`Location: ${loc.name}`}
+
+                                </CardTitle>
+                                <img src={this.state.userImg} className="user-image location-user-image"/>
                                 <CardText>{loc.desc}</CardText>
                                 {/*<Button>Go somewhere</Button>*/}
                             </Card>

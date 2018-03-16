@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/App.css';
-import Navigation from "./Navigation";
+import Navigation from "./common/Navigation";
 import Home from "./Home/Home";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import NewLocationForm from "./NewLocation/NewLocationForm";
