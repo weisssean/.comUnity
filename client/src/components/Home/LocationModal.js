@@ -2,36 +2,47 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 import {Card, CardGroup, CardText, CardTitle, Modal, ModalBody} from 'reactstrap';
+import {bindActionCreators} from "redux";
+import * as locationsActions from "../../actions/locationsActions";
+import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
 
 class LocationModal extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {};
+        this.getUserImgFromLocation = this.getUserImgFromLocation.bind(this);
     }
 
+    getUserImgFromLocation(){
+        this.props.actions.getUserImage(this.props.loc.userId).then(result=>{
 
+        }).catch(exception=>{
+
+        })
+    }
     render() {
-        const {location} = this.props;
+        const {loc} = this.props;
         return (
             <div>
                 {
-                    this.props.location.name &&
+                    this.props.loc.name &&
                     <Modal isOpen={this.props.show} toggle={this.props.toggleModule}
                            className={this.props.className ? this.props.className : ""}>
 
                         {/*<ModalHeader*/}
-                        {/*toggle={this.props.toggleModule}>{`Location: ${this.props.location.name}`}</ModalHeader>*/}
+                        {/*toggle={this.props.toggleModule}>{`Location: ${this.props.loc.name}`}</ModalHeader>*/}
                         <ModalBody>
 
                             <Card body>
-                                <CardTitle>{`Location: ${location.name}`}</CardTitle>
-                                <CardText>{location.desc}</CardText>
+                                <CardTitle>{`Location: ${loc.name}`}</CardTitle>
+                                <CardText>{loc.desc}</CardText>
                                 {/*<Button>Go somewhere</Button>*/}
                             </Card>
-                            {this.props.location.imageURLs &&
+                            {this.props.loc.imageURLs &&
                             <CardGroup>
                                 {
-                                    this.props.location.imageURLs.map((url, i) =>
+                                    this.props.loc.imageURLs.map((url, i) =>
 
                                         <Card key={i} body>
                                             <img src={url}/>
@@ -54,10 +65,25 @@ class LocationModal extends Component {
 }
 
 LocationModal.propTypes = {
+    actions: PropTypes.object.isRequired,
     className: PropTypes.string,
-    location: PropTypes.object.isRequired,
+    loc: PropTypes.object.isRequired,
     show: PropTypes.bool.isRequired,
     toggleModule: PropTypes.func.isRequired
 };
 
-export default LocationModal;
+//redux connect and map functions
+function mapStateToProps(state, ownProps) {
+    return {
+        loc:ownProps.loc
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(locationsActions, dispatch)
+    };
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LocationModal));
+

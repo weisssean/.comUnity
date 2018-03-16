@@ -92,9 +92,20 @@ LocationsApiClass.prototype = {
                     });
             });
         })
+    },
+
+    getUserImage(uId){
+        const url = "http://localhost:3006/users-result";
+
+        return new Promise((resolve, reject) => {
+            axios.get(url, {
+                params: {id:uId}
+            }).then(response => {
+              debugger;
+
+            });
+        })
     }
-
-
 };
 
 

@@ -63,7 +63,7 @@ class Home extends Component {
     render() {
         return (
             <div style={{position: "relative", height: "calc(100% - 54px)", width: "100%"}}>
-                <LocationModal location={this.state.selectedLocation} show={this.state.locationModal}
+                <LocationModal loc={this.state.selectedLocation} show={this.state.locationModal}
                                toggleModule={this.toggleLocationModal}/>
                 <div style={{height: "100%", width: "100%"}}>
                     <SideNav toggleDrawer={this.props.toggleSideNav} showSideNav={this.props.sideNavOpen}/>

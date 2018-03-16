@@ -85,6 +85,14 @@ export function saveLocation(loc,uuid) {
     }
 }
 
+export function getUserImage(uId){
+        return api.getUserImage(uId).then(img => {
+           return img;
+        }).catch(error => {
+            throw(error);
+        })
+}
+
 export function callSuccess() {
     return function (dispatch, getState) {
         dispatch(ajaxCallSuccess());

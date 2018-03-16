@@ -54,8 +54,7 @@ class NewLocationForm extends React.Component {
                 address: "",
                 lat: 42.2793,
                 lng: -71.4162,
-                userId: props.user.uId,
-                userImageUrl: props.user.uImg,
+                userId: props.user.id,
                 imageURLs: []
             }
         };
@@ -72,6 +71,24 @@ class NewLocationForm extends React.Component {
         this.locationFormIsValid = this.locationFormIsValid.bind(this);
         this.setFormById = this.setFormById.bind(this);
 
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.match.params.locId && (this.props.match.params.locId !== nextProps.match.params.locId || this.props.locations !== nextProps.locations)) {
+            this.setFormById(nextProps.match.params.locId);
+        }
+
+        let form = this.state.form;
+        if (!form.userId && this.props.user && this.props.user !== nextProps.user) {
+            form.userId = nextProps.user.id;
+            this.setState({form:form});
+        }
+    }
+
+    componentDidMount() {
+        if (this.props.match.params.locId && this.props.locations.length > 0) {
+            this.setFormById(this.props.match.params.locId);
+        }
     }
 
     clearTempImages() {
@@ -96,26 +113,13 @@ class NewLocationForm extends React.Component {
                 lat: loc.lat,
                 lng: loc.lng,
                 userId: loc.userId,
-                imageURLs: loc.imageURLs,
-                userImageUrl: loc.userImageUrl
+                imageURLs: loc.imageURLs
             };
             this.setState({form: form});
         }).catch(exception => {
             toastr.error(exception);
         });
     };
-
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.match.params.locId && (this.props.match.params.locId !== nextProps.match.params.locId || this.props.locations !== nextProps.locations)) {
-            this.setFormById(nextProps.match.params.locId);
-        }
-    }
-
-    componentDidMount() {
-        if (this.props.match.params.locId && this.props.locations.length > 0) {
-            this.setFormById(this.props.match.params.locId);
-        }
-    }
 
     selectType(event) {
         const type = event.target.value;

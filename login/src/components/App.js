@@ -16,21 +16,18 @@ class App extends Component {
 
 
     }
-    acceptedPostals = ["01701","01702"];
+    acceptedRegion = "MA";
 
     validateIp(){
 
         const url ="https://api.ipdata.co/";
         axios.get(url,{}).then(response=>{
             console.log("ip data:",response.data);
-                this.setState({local:(response.data && this.acceptedPostals.includes(response.data.postal))});
+                this.setState({local:(response.data && this.acceptedRegion ===response.data.region_code)});
 
         }).catch(exception=>{
 
         });
-        // $.getJSON('//freegeoip.net/json/?callback=?', function(data) {
-        //     console.log(JSON.stringify(data, null, 2));
-        // });
     }
     loginWithGoogle(){
         if(this.state.local){

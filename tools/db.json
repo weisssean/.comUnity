@@ -3,87 +3,17 @@
     "locations": [
       {
         "status": 1,
-        "uuid": "3e321167-1b78-411c-8919-250b26a442e4",
-        "name": "Sean Weiss",
-        "desc": "sadsa dsdF a sdf adsf asd  asfd ",
+        "uuid": "23a2f012-196c-4408-aeef-6f14a0da58c7",
+        "name": "Location 2",
+        "desc": "This location is newer than the first",
         "type": 1,
-        "phone": "5086856467",
-        "email": "weisssean@gmail.com",
-        "address": "14 Amy Rd",
-        "lat": 42.2793,
-        "lng": -71.4162,
-        "imageURLs": [],
-        "userId": "",
-        "userImageUrl": ""
-      },
-      {
-        "status": 1,
-        "uuid": "07e404d0-e0dc-43a6-a076-067f04652006",
-        "name": "Eggs for free",
-        "desc": "A description for this location",
-        "type": 3,
-        "phone": "23412421424214",
-        "email": "weisssean@hotmail.com",
-        "address": "2 Pershing Avenue",
-        "lat": 42.27625173852058,
-        "lng": -71.4132817565918,
-        "imageURLs": [
-          "http://localhost:9090/images/4776308ad08bf73d2a1ef51b9b0175bb.jpg",
-          "http://localhost:9090/images/9e12b079d8a242a625fa6c8ebb6ee5a3.png",
-          "http://localhost:9090/images/7e284e4de9103a1e6e69161b572f3407.jpg"
-        ],
-        "userId": "",
-        "userImageUrl": ""
-      },
-      {
-        "status": 1,
-        "uuid": "d67e16c4-e8ef-4c2a-a7e8-1421bf43d6f1",
-        "name": "Sean Weiss",
-        "desc": "I keep 14 hives in the backyard where I must...",
-        "type": 2,
-        "phone": "5086856467",
-        "email": "weisssean@gmail.com",
-        "address": "14 Amy Rd",
-        "lat": 42.289713780825736,
-        "lng": -71.40178044433594,
-        "userId": "",
-        "imageURLs": [],
-        "userImageUrl": ""
-      },
-      {
-        "status": 1,
-        "uuid": "b1e4a0a6-c6aa-4358-8126-dfcd6ada6c17",
-        "name": "Kenneth Weiss",
-        "desc": "We have about 60 chickens and too many eggs",
-        "type": 1,
-        "phone": "5086856467",
-        "email": "weisssean@gmail.com",
-        "address": "54 Harrington rd",
-        "lat": 42.26761419692368,
-        "lng": -71.51233037109375,
-        "userId": "",
-        "imageURLs": [
-          "http://localhost:9090/images/9e12b079d8a242a625fa6c8ebb6ee5a3.png",
-          "http://localhost:9090/images/7e284e4de9103a1e6e69161b572f3407.jpg"
-        ],
-        "userImageUrl": ""
-      },
-      {
-        "status": 1,
-        "uuid": "70b1dfa3-2363-449f-a105-96b3f478a9b1",
-        "name": "SHEAN WEISS",
-        "desc": "Hi kenny you are here and...",
-        "type": 1,
-        "phone": "5086856467",
-        "email": "weisssean@gmail.com",
+        "phone": "",
+        "email": "",
         "address": "",
-        "lat": 42.2793,
-        "lng": -71.4162,
-        "userId": "",
-        "imageURLs": [
-          "http://localhost:9090/images/1846e4d890f33df39ef86c04dcf05555.jpg"
-        ],
-        "userImageUrl": ""
+        "lat": 42.28730098482599,
+        "lng": -71.38718922777156,
+        "userId": "10155551990623507",
+        "imageURLs": []
       }
     ]
   },
