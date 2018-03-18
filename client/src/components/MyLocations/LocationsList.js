@@ -70,7 +70,7 @@ LocationsList.propTypes = {
 //redux connect and map functions
 function mapStateToProps(state, ownProps) {
     return {
-        locations: state.locations,
+        locations: state.locations.filter(local=>local.userId === state.user.id),
     };
 
 }

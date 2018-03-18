@@ -6,7 +6,7 @@ import {withRouter} from "react-router-dom";
 import * as locationsActions from "../../actions/locationsActions";
 import {bindActionCreators} from "redux";
 import toastr from "toastr";
-import LocationModal from "./LocationModal"
+import LocationModal from "./locationModal/LocationModal"
 import SideNav from "./SideNav/SideNav";
 
 class Home extends Component {

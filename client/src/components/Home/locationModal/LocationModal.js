@@ -1,33 +1,36 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
-import {Card, CardGroup, CardText, CardTitle, Modal, ModalBody} from 'reactstrap';
+import {Row, Col, Card, CardGroup, CardText, CardTitle, Modal, ModalBody} from 'reactstrap';
 import {bindActionCreators} from "redux";
-import * as locationsActions from "../../actions/locationsActions";
+import * as locationsActions from "../../../actions/locationsActions";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
+import UserPanel from "./UserPanel";
+import CommentsBlock from "./Comments/CommentsBlock";
 
 class LocationModal extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            userImg:""
+            locUser: {}
         };
         this.getUserImgFromLocation = this.getUserImgFromLocation.bind(this);
     }
 
-    getUserImgFromLocation(uId){
-        this.props.actions.getUserImage(uId).then(result=>{
-            this.setState({userImg:result})
-        }).catch(exception=>{
+    getUserImgFromLocation(uId) {
+        this.props.actions.getUserByUID(uId).then(result => {
+
+
+            this.setState({locUser: result})
+        }).catch(exception => {
             debugger;
 
         })
     }
 
     componentWillReceiveProps(nextProps) {
-
-        if ( nextProps.loc && this.props.loc !== nextProps.loc) {
+        if (nextProps.loc && this.props.loc !== nextProps.loc) {
             this.getUserImgFromLocation(nextProps.loc.userId);
         }
     }
@@ -49,28 +52,28 @@ class LocationModal extends Component {
                                 <CardTitle>{`Location: ${loc.name}`}
 
                                 </CardTitle>
-                                <img src={this.state.userImg} className="user-image location-user-image"/>
+                                <UserPanel user={this.state.locUser}/>
                                 <CardText>{loc.desc}</CardText>
                                 {/*<Button>Go somewhere</Button>*/}
                             </Card>
-                            {this.props.loc.imageURLs &&
-                            <CardGroup>
-                                {
-                                    this.props.loc.imageURLs.map((url, i) =>
+                            <br/>
+                            {
+                                this.props.loc.imageURLs &&
 
-                                        <Card key={i} body>
-                                            <img src={url}/>
-                                        </Card>
-                                    )
-                                }
-                            </CardGroup>
+
+                                        this.props.loc.imageURLs.map((url, i) =>
+                                        <Row>
+                                            <Col>
+                                            <Card key={i} body>
+                                                <img style={{width: "100%"}} src={url}/>
+                                            </Card>
+                                            </Col>
+                                        </Row>
+                                        )
+
                             }
+                            <CommentsBlock locId={this.props.loc.uuid} />
                         </ModalBody>
-                        {/*<ModalFooter>*/}
-                        {/*<Button color="secondary" onClick={this.props.toggleModule}>Cancel</Button>&nbsp;*/}
-                        {/*<Button color="primary" onClick={this.delete}>Delete</Button>*/}
-                        {/*</ModalFooter>*/}
-
                     </Modal>
                 }
             </div>
@@ -89,7 +92,7 @@ LocationModal.propTypes = {
 //redux connect and map functions
 function mapStateToProps(state, ownProps) {
     return {
-        loc:ownProps.loc
+        loc: ownProps.loc
     };
 }
 

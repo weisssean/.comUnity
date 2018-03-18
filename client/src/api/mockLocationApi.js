@@ -94,17 +94,90 @@ LocationsApiClass.prototype = {
         })
     },
 
-    getUserImage(uId){
+    getUserImage(uId) {
         const url = "http://localhost:3006/users-result";
 
         return new Promise((resolve, reject) => {
             axios.get(url, {
-                params: {id:uId}
+                params: {id: uId}
             }).then(response => {
-                const user = response.data.users.filter(u=>u.id===uId)[0];
-                    if(user&& user.photos[0])
-                        resolve(user.photos[0].value);
-                    else reject('User image not found');
+                const user = response.data.users.filter(u => u.id === uId)[0];
+                if (user && user.photos[0])
+                    resolve(user.photos[0].value);
+                else reject('User image not found');
+            });
+        })
+    },
+
+    getUserByUId(uId) {
+        const url = "http://localhost:3006/users-result";
+
+        return new Promise((resolve, reject) => {
+            axios.get(url, {
+                params: {id: uId}
+            }).then(response => {
+                const user = response.data.users.filter(u => u.id === uId)[0];
+                if (user)
+                    resolve(user);
+                else reject('User not found');
+            });
+        })
+    },
+    getCommentsByLocationId(locId) {
+        let url = "http://localhost:3006/location-comments-results";
+
+        return new Promise((resolve, reject) => {
+            axios.get(url, {
+                params: {locId: locId}
+            }).then(response => {
+                let comments = response.data.comments.filter(comment => comment.locationId === locId);
+                if (comments) {
+                    url = "http://localhost:3006/users-result";
+                    axios.get(url, {
+                        params: {}
+                    }).then(response => {
+                        const users = response.data.users;
+                        if (users)
+                            comments.map(comment => comment.user = users.filter(u => u.id === comment.userId)[0]);
+                        resolve(comments);
+                    })
+                } else
+                    reject('No comments found');
+            })
+
+
+        })
+    },
+    saveComment(comment){
+        let url = "http://localhost:3006/location-comments-results";
+
+        return new Promise((resolve, reject) => {
+            axios.get(url, {
+                params: {}
+            }).then(response => {
+                let comments = response.data.comments;
+                comments.push(comment);
+
+                axios.put(url, {comments: comments}, {
+                    params: {}
+                })
+                    .then(function (response) {
+
+                        if (comments) {
+                            url = "http://localhost:3006/users-result";
+                            axios.get(url, {
+                                params: {}
+                            }).then(response => {
+                                const users = response.data.users;
+                                if (users)
+                                    comments.map(comment => comment.user = users.filter(u => u.id === comment.userId)[0]);
+                                resolve(comments);
+                            })
+                        }
+                    })
+                    .catch(function (error) {
+                        reject(`Comment not saved!`);
+                    });
             });
         })
     }

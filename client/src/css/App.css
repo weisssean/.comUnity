@@ -153,3 +153,29 @@
     display: inline;
 
 }
+
+.comment-block .add-comment{
+    display: flex;
+    width: 100%;
+}
+.comment-block .comment-row {
+      display: flex;
+      width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+.comment-block .add-comment .user-image, .comment-row .user-image {
+    float: left;
+    margin: auto 1rem auto 0;
+}
+
+.comment-block .add-comment .add-comment-input {
+    float: right;
+    width: calc(100% - 2.5rem);
+}
+
+.comment-row .comment {
+    float: right;
+    margin: auto 1rem auto 0;
+}

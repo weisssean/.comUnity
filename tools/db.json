@@ -13,7 +13,10 @@
         "lat": 42.28730098482599,
         "lng": -71.38718922777156,
         "userId": "10155551990623507",
-        "imageURLs": []
+        "imageURLs": [
+          "http://localhost:9090/images/b872e5c1e920769268b8569759eb75b1.jpg",
+          "http://localhost:9090/images/fde0767e1014046ef230d9d591cb14e0.jpg"
+        ]
       }
     ]
   },
@@ -66,6 +69,34 @@
             "value": "https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/28870025_10155546720193507_5722353840934617088_n.jpg?oh=0d50656aae698cfb3d9ef4bab26de291&oe=5B3EBFF3"
           }
         ]
+      }
+    ]
+  },
+  "location-comments-results": {
+    "comments": [
+      {
+        "comment": "this is my first comment regarding a location",
+        "userId": "10155551990623507",
+        "locationId": "23a2f012-196c-4408-aeef-6f14a0da58c7",
+        "time": "2-12-2018"
+      },
+      {
+        "comment": "this is my first comment too",
+        "userId": "111164269255537181390",
+        "locationId": "23a2f012-196c-4408-aeef-6f14a0da58c7",
+        "time": "2-12-2018"
+      },
+      {
+        "comment": "U want a comment?",
+        "userId": "111516644512196765667",
+        "time": "2018-03-18T12:14:28-04:00",
+        "locationId": "23a2f012-196c-4408-aeef-6f14a0da58c7"
+      },
+      {
+        "comment": "I too want a comment",
+        "userId": "111516644512196765667",
+        "time": "2018-03-18T12:20:58-04:00",
+        "locationId": "23a2f012-196c-4408-aeef-6f14a0da58c7"
       }
     ]
   }

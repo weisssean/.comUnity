@@ -399,7 +399,8 @@ class NewLocationForm extends React.Component {
 
                                     <ImageUpload uploadSuccess={this.uploadSuccess} name={this.state.form.name}
                                                  currentImages={this.state.form.imageURLs}/>
-                                    {this.props.location.imageURLs &&
+                                    {
+                                        this.state.form.imageURLs &&
                                     <CardGroup>
                                         {
                                             this.state.form.imageURLs.map((url, i) =>
@@ -409,7 +410,7 @@ class NewLocationForm extends React.Component {
                                                     <CardText>With supporting text below as a natural lead-in to
                                                         additional
                                                         content.</CardText>
-                                                    <img src={url}/>
+                                                    <img src={url} style={{width:"100%"}}/>
                                                     <Button>Go somewhere</Button>
                                                 </Card>
                                             )

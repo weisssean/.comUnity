@@ -84,12 +84,30 @@ export function saveLocation(loc, uuid) {
         }
     }
 }
-
-
-export function getUserImage(uId) {
+export function saveComment(comment) {
     return function (dispatch) {
-        return api.getUserImage(uId).then(img => {
-            return img;
+        return api.saveComment(comment).then(comments => {
+            return comments;
+        }).catch(error => {
+            throw(error);
+        })
+    }
+}
+
+
+export function getUserByUID(uId) {
+    return function (dispatch) {
+        return api.getUserByUId(uId).then(user => {
+            return user;
+        }).catch(error => {
+            throw(error);
+        })
+    }
+}
+export function getCommentsByLocationId(locId) {
+    return function (dispatch) {
+        return api.getCommentsByLocationId(locId).then(comments => {
+            return comments;
         }).catch(error => {
             throw(error);
         })
