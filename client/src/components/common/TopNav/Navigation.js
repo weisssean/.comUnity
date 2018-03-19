@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
-import * as userActions from "../../actions/userActions";
+import * as locationsActions from "../../../actions/locationsActions";
 import {
     Collapse,
     DropdownItem,
@@ -17,10 +17,10 @@ import {
 } from 'reactstrap';
 
 // import {GoogleLogout} from 'react-google-login';
-import anon from '../../assets/images/anonymus.png'
+import anon from '../../../assets/images/anonymus.png'
 
 import Fa from 'react-fontawesome';
-import UserPanel from "../Home/UserPanel";
+import UserPanel from "../../Home/UserPanel";
 
 class Navigation extends React.Component {
     constructor(props) {
@@ -167,7 +167,7 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(userActions, dispatch)
+        actions: bindActionCreators(locationsActions, dispatch)
     };
 }
 

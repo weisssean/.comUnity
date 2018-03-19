@@ -140,7 +140,7 @@ function findOrCreateUser(profile) {
                     .catch(function (error) {
 
                         console.log("catch", error);
-                        reject(error);
+                        // reject(error);
 
                     });
             } else {

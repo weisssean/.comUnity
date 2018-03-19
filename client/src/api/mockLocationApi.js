@@ -128,9 +128,9 @@ LocationsApiClass.prototype = {
 
         return new Promise((resolve, reject) => {
             axios.get(url, {
-                params: {locId: locId}
+                params: {"locationId": locId}
             }).then(response => {
-                let comments = response.data.comments.filter(comment => comment.locationId === locId);
+                let comments = response.data;//.filter(comment => comment.locationId === locId);
                 if (comments) {
                     url = "http://localhost:3006/users-result";
                     axios.get(url, {
@@ -155,7 +155,7 @@ LocationsApiClass.prototype = {
             axios.get(url, {
                 params: {}
             }).then(response => {
-                let comments = response.data.comments;
+                let comments = response.data;
                 comments.push(comment);
 
                 axios.put(url, {comments: comments}, {

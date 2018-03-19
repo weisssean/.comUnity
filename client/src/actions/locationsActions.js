@@ -63,6 +63,14 @@ export function getLocationById(id) {
     };
 }
 
+export function search(input) {
+    return function (dispatch, getState) {
+        let locations = getState().locations;
+
+        //locations.filter
+
+    }
+}
 
 export function saveLocation(loc, uuid) {
     return function (dispatch) {
