@@ -11,126 +11,134 @@ import toastr from "toastr";
 
 
 class CommentsBlock extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            comments: [],
-            form: {
-                comment: ""
-            },
-            errors: {}
-        };
-        this.getComments = this.getComments.bind(this);
-        this.updateFormState = this.updateFormState.bind(this);
-        this.addComment = this.addComment.bind(this);
-        this.commentFormIsValid = this.commentFormIsValid.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = {
+      comments: [],
+      form: {
+        comment: ""
+      },
+      errors: {}
+    };
 
+  }
+
+  componentDidMount() {
+    if (this.props.locId) {
+      this.getComments(this.props.locId);
     }
+  }
 
-
-    updateFormState(event) {
-        const field = event.target.name;
-        let form = this.state.form;
-        form[field] = event.target.value;
-        return this.setState({form: form});
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.locId && this.props.locId !== nextProps.locId) {
+      this.getComments(nextProps.locId);
     }
+  }
 
 
-    addComment(e){
-        e.preventDefault();
-        if (this.state.form.comment && this.commentFormIsValid()) {
-            let form = this.state.form;
-            form.userId = this.props.user.id;
-            form.time = moment().format();
-            form.locationId = this.props.locId;
-            this.props.actions.saveComment(this.state.form).then(comments=>{
-                this.setState({comments:comments, form:{comment:""}});
-            }).catch(error=>{
-                console.log(error);
-                toastr.error("Comment not saved!")
-            });
-        }
-    }
+  updateFormState = (event) => {
+    const field = event.target.name;
+    let form = this.state.form;
+    form[field] = event.target.value;
+    return this.setState({form: form});
+  };
 
-    commentFormIsValid(){
+  addComment = (e) => {
+    e.preventDefault();
+    if (this.state.form.comment && this.commentFormIsValid()) {
+      let form = this.state.form;
+      form.userId = this.props.user.id;
+      form.user = this.props.user._id;
+      // form.time = moment().format();
+      form.locationId = this.props.locId;
 
-        let formIsValid = true;
-        let errors = {};
 
-        if (this.state.form.comment.trim().length > 160) {
-            errors.comment = 'Comment is too long.';
-            formIsValid = false;
-        }
-
-        this.setState({errors: errors});
-        return formIsValid;
-    }
-    getComments(locId) {
-        console.log(this.props.actions);
-        this.props.actions.getCommentsByLocationId(locId).then(result => {
-            this.setState({comments: result})
-        }).catch(exception => {
-            debugger;
+      this.props.actions
+        .saveComment(this.state.form)
+        .then(comment => {
+          this.setState((prevState) => {
+            const comments = prevState.comments;
+            comments.push(comment);
+            return ({comments, form: {comment: ""}})
+          });
         })
+        .catch(error => {
+          console.log(error);
+          toastr.error("Comment not saved!")
+        });
+    }
+  };
+
+  commentFormIsValid = () => {
+
+    let formIsValid = true;
+    let errors = {};
+
+    if (this.state.form.comment.trim().length > 160) {
+      errors.comment = 'Comment is too long.';
+      formIsValid = false;
     }
 
-    componentDidMount() {
-        if (this.props.locId) {
-            this.getComments(this.props.locId);
-        }
-    }
+    this.setState({errors: errors});
+    return formIsValid;
+  };
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.locId && this.props.locId !== nextProps.locId) {
-            this.getComments(nextProps.locId);
-        }
-    }
+  getComments = (locId) => {
+    console.log(this.props.actions);
+    this.props.actions
+      .getCommentsByLocationId(locId)
+      .then(result => {
+        this.setState({comments: result})
+      })
+      .catch(exception => {
+        console.error(exception);
+      })
+  };
 
-    render() {
-        return (
-            <div className="comment-block container">
-                <Row>
-                    <form onSubmit={this.addComment} className="add-comment">
-                        {
-                            this.props.user.photos && this.props.user.photos[0] &&
-                            <img src={this.props.user.photos[0].value}
-                                 className="user-image"/>
-                        }
-                        <div className="add-comment-input">
-                            <TextInput name={"comment"}
-                                       placeholder={"Comment on this location"}
-                                       rows={"5"}
-                                       label={""}
-                                       onChange={this.updateFormState}
-                                       error={this.state.errors.comment}
-                                       value={this.state.form.comment}/>
-                        </div>
-                    </form>
-                </Row>
-                {
-                    this.state.comments.map(comment => <Comment comment={comment}/>)
-                }
+  render() {
+    return (
+      <div className="comment-block container">
+        <Row>
+          <form onSubmit={this.addComment} className="add-comment">
+            {
+              this.props.user.photos && this.props.user.photos[0] &&
+              <img src={this.props.user.photos[0]}
+                   className="user-image"/>
+            }
+            <div className="add-comment-input">
+              <TextInput name={"comment"}
+                         placeholder={"Comment on this location"}
+                         rows={"5"}
+                         label={""}
+                         onChange={this.updateFormState}
+                         error={this.state.errors.comment}
+                         value={this.state.form.comment}/>
             </div>
-        )
-    }
+          </form>
+        </Row>
+        {
+          this.state.comments.map(comment => <Comment comment={comment}/>)
+        }
+      </div>
+    )
+  }
 }
 
 CommentsBlock.propTypes = {
-    locId: PropTypes.string.isRequired,
+  locId: PropTypes.string.isRequired,
 };
 
 //redux connect and map functions
 function mapStateToProps(state, ownProps) {
-    return {
-        user: state.user
-    };
-
+  return {
+    user: state.user
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(locationsActions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(locationsActions, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentsBlock);

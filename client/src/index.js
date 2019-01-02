@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from "react-redux";
 
-import './css/index.css';
 import "../node_modules/toastr/build/toastr.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './css/index.css';
 
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';

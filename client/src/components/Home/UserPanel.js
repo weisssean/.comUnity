@@ -31,7 +31,7 @@ class UserPanel extends Component {
                 {user.id && <div>
                     <img className="user-image"
                          onError={this.onUserImageError}//e => e.src = "./assets/images/anonymus.png"
-                         src={user.photos&&user.photos[0] ? user.photos[0].value : anon}
+                         src={user.photos&&user.photos[0] ? user.photos[0] : anon}
                     />
                     <div className="nav-link">
                         {/*<img src={user ? user.uImg : anon}/>*/}

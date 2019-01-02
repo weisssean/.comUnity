@@ -7,7 +7,7 @@ const UserPanel = ({user}) => {
         <div>
             {
                 user.photos && user.photos[0] &&
-                <img src={user.photos[0].value}
+                <img src={user.photos[0]}
                      className="user-image location-user-image"/>
             }
         </div>

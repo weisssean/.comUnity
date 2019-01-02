@@ -377,3 +377,10 @@
 .nav-links-list .active .list-group-item-heading {
   color: #eee;
 }
+
+
+
+.scroll-rows .jumbotron{
+    margin-bottom: 0;
+      padding: 1rem 1rem;
+}

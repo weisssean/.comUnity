@@ -17,13 +17,9 @@ class Home extends Component {
             locationModal: props.match.params.locId!== undefined,
             selectedLocation: {}
         };
-
-        this.toggleLocationModal = this.toggleLocationModal.bind(this);
-        this.showLocationModal = this.showLocationModal.bind(this);
-
     }
 
-    toggleLocationModal(show) {
+    toggleLocationModal = (show)=> {
         this.setState({
             locationModal: show === true ? show : !this.state.locationModal
         });
@@ -50,20 +46,25 @@ class Home extends Component {
         }
     }
 
-    showLocationModal(locId) {
-        this.props.actions.getLocationById(locId).then(loc => {
+    showLocationModal =(locId) => {
+        this.props.actions
+          .getLocationById(locId)
+          .then(loc => {
             this.setState({selectedLocation: loc});
             this.toggleLocationModal(true);
-        }).catch(exception => {
+        })
+          .catch(exception => {
             toastr.error(exception);
             this.props.history.push("/");
         });
-    }
+    };
 
     render() {
         return (
             <div style={{position: "relative", height: "calc(100% - 54px)", width: "100%"}}>
-                <LocationModal loc={this.state.selectedLocation} show={this.state.locationModal}
+                <LocationModal loc={this.state.selectedLocation}
+                               show={this.state.locationModal}
+                               onClosed={()=>{this.props.history.push("/");}}
                                toggleModule={this.toggleLocationModal}/>
                 <div style={{height: "100%", width: "100%"}}>
                     <SideNav toggleDrawer={this.props.toggleSideNav} showSideNav={this.props.sideNavOpen}/>

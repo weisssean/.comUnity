@@ -23,7 +23,7 @@ export default function locationsReducer(state = initialState.locations, action)
       ].sort(compare);
     case types.UPDATE_LOCATION_SUCCESS:
       return [
-        ...state.filter(l => l.uuid !== action.loc.uuid),
+        ...state.filter(l => l._id !== action.loc._id),
         Object.assign({}, action.loc)
       ].sort(compare);
     default:
